@@ -1,0 +1,97 @@
+ Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('This is the Charts Screen'),
+            // Display the selected index passed from the drawer
+            Text('Selected Index: $_selectedIndex'),
+
+           LineChart(
+               LineChartData(
+                 gridData: FlGridData(show: true),
+                 titlesData: FlTitlesData(
+                   leftTitles: AxisTitles(
+                     sideTitles: SideTitles(
+                     showTitles: true,
+                     interval: 4, // Customize based on your scale
+                     getTitlesWidget: (value, meta) {
+                       if (value.isNaN || value.isInfinite) {
+                         return Text(''); // Return an empty widget for invalid values
+                       }
+                       return Text('${value.toInt()}'); // Display the value as an integer
+                     },
+                   ),),
+                   bottomTitles: AxisTitles(
+                    sideTitles:  SideTitles(
+                     showTitles: true,
+                     getTitlesWidget: (value, meta) {
+                       if (value.isNaN || value.isInfinite) {
+                         return Text(''); // Return an empty widget for invalid values
+                       }
+                       // Use a switch-case to map X values to months
+                       switch (value.toInt()) {
+                         case 0:
+                           return Text('Jan');
+                         case 1:
+                           return Text('Feb');
+                         case 2:
+                           return Text('Mar');
+                         case 3:
+                           return Text('Apr');
+                         case 4:
+                           return Text('May');
+                         case 5:
+                           return Text('Jun');
+                         case 6:
+                           return Text('Jul');
+                         case 7:
+                           return Text('Aug');
+                         case 8:
+                           return Text('Sep');
+                         case 9:
+                           return Text('Oct');
+                         case 10:
+                           return Text('Nov');
+                         case 11:
+                           return Text('Dec');
+                         default:
+                           return Text(''); // Return an empty widget for out-of-range values
+                       }
+                     },
+                   ),),),
+                   borderData: FlBorderData(show: true),
+                   minX: 0,
+                   maxX: 11, // For 12 months
+                   minY: 0,
+                   maxY: 12, // Adjust the max Y based on your data scale
+                   lineBarsData: [
+                   LineChartBarData(
+                   spots: [
+                   FlSpot(0, 8),  // Jan
+               FlSpot(1, 6),  // Feb
+               FlSpot(2, 8),  // Mar
+               FlSpot(3, 10), // Apr
+               FlSpot(4, 9),  // May
+               FlSpot(5, 11), // Jun
+               FlSpot(6, 7),  // Jul
+               FlSpot(7, 8),  // Aug
+               FlSpot(8, 9),  // Sep
+               FlSpot(9, 12), // Oct
+               FlSpot(10, 11),// Nov
+               FlSpot(11, 10),// Dec
+               ],
+           isCurved: true,
+           color: Colors.green,
+           dotData: FlDotData(show: true),
+        belowBarData: BarAreaData(
+          show: true,
+          color: Colors.green.withOpacity(0.3),
+               ),),
+
+          ],),), ],
+        ),
+      ),
+    );
+  }
